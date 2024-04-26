@@ -72,7 +72,7 @@ export type HeaderDocument<Lang extends string = string> =
     Lang
   >;
 
-type HomepageDocumentDataSlicesSlice = never;
+type HomepageDocumentDataSlicesSlice = TestySlice;
 
 /**
  * Content for HomePage documents
@@ -200,6 +200,58 @@ export type PageDocument<Lang extends string = string> =
 
 export type AllDocumentTypes = HeaderDocument | HomepageDocument | PageDocument;
 
+/**
+ * Primary content in *Testy → Primary*
+ */
+export interface TestySliceDefaultPrimary {
+  /**
+   * testyfield field in *Testy → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: testy.primary.testyfield
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  testyfield: prismic.RichTextField;
+
+  /**
+   * testymage field in *Testy → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: testy.primary.testymage
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  testymage: prismic.ImageField<never>;
+}
+
+/**
+ * Default variation for Testy Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TestySliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<TestySliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Testy*
+ */
+type TestySliceVariation = TestySliceDefault;
+
+/**
+ * Testy Shared Slice
+ *
+ * - **API ID**: `testy`
+ * - **Description**: Testy
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TestySlice = prismic.SharedSlice<"testy", TestySliceVariation>;
+
 declare module "@prismicio/client" {
   interface CreateClient {
     (
@@ -220,6 +272,10 @@ declare module "@prismicio/client" {
       PageDocumentData,
       PageDocumentDataSlicesSlice,
       AllDocumentTypes,
+      TestySlice,
+      TestySliceDefaultPrimary,
+      TestySliceVariation,
+      TestySliceDefault,
     };
   }
 }

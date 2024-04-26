@@ -1,0 +1,1 @@
+npx esbuild --format=cjs ./scripts/updateModels.mts | node
