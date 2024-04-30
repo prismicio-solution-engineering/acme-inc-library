@@ -152,7 +152,7 @@ class UnsupportedAdapterError extends Error {
 // Get an auth token, could use SliceMachineAuthManager instead
 const getAuthToken = async () => {
   const email = process.env.CMSRP_EMAIL
-  const password = process.env.CMSRP_PASSWORD
+  const password = process.env.CMSRP_PWD
   const authResponse = await fetch('https://auth.prismic.io/login', {
     headers: {
       'Content-Type': 'application/json',
