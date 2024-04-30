@@ -213,13 +213,18 @@ export interface TestySliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   testyfield: prismic.RichTextField;
+}
 
+/**
+ * Primary content in *Testy → Items*
+ */
+export interface TestySliceDefaultItem {
   /**
-   * testymage field in *Testy → Primary*
+   * testymage field in *Testy → Items*
    *
    * - **Field Type**: Image
    * - **Placeholder**: *None*
-   * - **API ID Path**: testy.primary.testymage
+   * - **API ID Path**: testy.items[].testymage
    * - **Documentation**: https://prismic.io/docs/field#image
    */
   testymage: prismic.ImageField<never>;
@@ -235,7 +240,7 @@ export interface TestySliceDefaultPrimary {
 export type TestySliceDefault = prismic.SharedSliceVariation<
   "default",
   Simplify<TestySliceDefaultPrimary>,
-  never
+  Simplify<TestySliceDefaultItem>
 >;
 
 /**
@@ -274,6 +279,7 @@ declare module "@prismicio/client" {
       AllDocumentTypes,
       TestySlice,
       TestySliceDefaultPrimary,
+      TestySliceDefaultItem,
       TestySliceVariation,
       TestySliceDefault,
     };

@@ -1,10 +1,8 @@
-name: Create website on website factory ui input
+name: Push models to instances
 on: 
-  workflow_dispatch:
-    inputs:
-      website_name:
-        description: 'Name Prismic Repo ID (and Website if available)'
-        required: true
+  push:
+    branches:
+        - main
 jobs:
   Create-Prismic-Repo-And-Deploy-Website:
     runs-on: ubuntu-latest
