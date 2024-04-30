@@ -216,21 +216,6 @@ export interface TestySliceDefaultPrimary {
 }
 
 /**
- * Primary content in *Testy → Items*
- */
-export interface TestySliceDefaultItem {
-  /**
-   * testymage field in *Testy → Items*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: testy.items[].testymage
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  testymage: prismic.ImageField<never>;
-}
-
-/**
  * Default variation for Testy Slice
  *
  * - **API ID**: `default`
@@ -240,7 +225,7 @@ export interface TestySliceDefaultItem {
 export type TestySliceDefault = prismic.SharedSliceVariation<
   "default",
   Simplify<TestySliceDefaultPrimary>,
-  Simplify<TestySliceDefaultItem>
+  never
 >;
 
 /**
@@ -279,7 +264,6 @@ declare module "@prismicio/client" {
       AllDocumentTypes,
       TestySlice,
       TestySliceDefaultPrimary,
-      TestySliceDefaultItem,
       TestySliceVariation,
       TestySliceDefault,
     };

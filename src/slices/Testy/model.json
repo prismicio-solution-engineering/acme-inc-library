@@ -22,16 +22,7 @@
           }
         }
       },
-      "items": {
-        "testymage": {
-          "type": "Image",
-          "config": {
-            "label": "testymage",
-            "constraint": {},
-            "thumbnails": []
-          }
-        }
-      }
+      "items": {}
     }
   ]
 }
