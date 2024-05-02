@@ -3,11 +3,12 @@ import { SliceZone } from "@prismicio/react";
 import { components } from "@/slices/index"
 import Header from "@/components/Header";
 import { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 
 export async function generateMetadata(): Promise<Metadata> {
   const client = createClient();
-  const page = await client.getSingle("homepage");
+  const page = await client.getSingle("homepage").catch(notFound());
 
   return {
     title: page.data.meta_title,
@@ -18,8 +19,8 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function Page({ }) {
   const client = createClient();
 
-  const page = await client.getSingle("homepage");
-  const header = await client.getSingle("header");
+  const page = await client.getSingle("homepage").catch(notFound());
+  const header = await client.getSingle("header").catch(notFound());
 
   return(
   <>

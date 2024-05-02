@@ -72,7 +72,7 @@ export type HeaderDocument<Lang extends string = string> =
     Lang
   >;
 
-type HomepageDocumentDataSlicesSlice = TestySlice;
+type HomepageDocumentDataSlicesSlice = TeamSectionSlice;
 
 /**
  * Content for HomePage documents
@@ -201,46 +201,84 @@ export type PageDocument<Lang extends string = string> =
 export type AllDocumentTypes = HeaderDocument | HomepageDocument | PageDocument;
 
 /**
- * Primary content in *Testy → Primary*
+ * Primary content in *TeamSection → Primary*
  */
-export interface TestySliceDefaultPrimary {
+export interface TeamSectionSliceDefaultPrimary {
   /**
-   * testyfield field in *Testy → Primary*
+   * Section Title field in *TeamSection → Primary*
    *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: testy.primary.testyfield
+   * - **Field Type**: Title
+   * - **Placeholder**: Our Team
+   * - **API ID Path**: team_section.primary.section_title
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
-  testyfield: prismic.RichTextField;
+  section_title: prismic.TitleField;
 }
 
 /**
- * Default variation for Testy Slice
+ * Primary content in *TeamSection → Items*
+ */
+export interface TeamSectionSliceDefaultItem {
+  /**
+   * Name field in *TeamSection → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Name of the team member
+   * - **API ID Path**: team_section.items[].name
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  name: prismic.KeyTextField;
+
+  /**
+   * Position field in *TeamSection → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Position of the team member
+   * - **API ID Path**: team_section.items[].position
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  position: prismic.KeyTextField;
+
+  /**
+   * Profile Picture field in *TeamSection → Items*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team_section.items[].profile_picture
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  profile_picture: prismic.ImageField<never>;
+}
+
+/**
+ * Default Variation variation for TeamSection Slice
  *
  * - **API ID**: `default`
- * - **Description**: Default
+ * - **Description**: Default variation displaying team members with their names, positions, and profile pictures.
  * - **Documentation**: https://prismic.io/docs/slice
  */
-export type TestySliceDefault = prismic.SharedSliceVariation<
+export type TeamSectionSliceDefault = prismic.SharedSliceVariation<
   "default",
-  Simplify<TestySliceDefaultPrimary>,
-  never
+  Simplify<TeamSectionSliceDefaultPrimary>,
+  Simplify<TeamSectionSliceDefaultItem>
 >;
 
 /**
- * Slice variation for *Testy*
+ * Slice variation for *TeamSection*
  */
-type TestySliceVariation = TestySliceDefault;
+type TeamSectionSliceVariation = TeamSectionSliceDefault;
 
 /**
- * Testy Shared Slice
+ * TeamSection Shared Slice
  *
- * - **API ID**: `testy`
- * - **Description**: Testy
+ * - **API ID**: `team_section`
+ * - **Description**: The Team Section is made of a card for each team member, each card contains a name, a position, and a profile picture.
  * - **Documentation**: https://prismic.io/docs/slice
  */
-export type TestySlice = prismic.SharedSlice<"testy", TestySliceVariation>;
+export type TeamSectionSlice = prismic.SharedSlice<
+  "team_section",
+  TeamSectionSliceVariation
+>;
 
 declare module "@prismicio/client" {
   interface CreateClient {
@@ -262,10 +300,11 @@ declare module "@prismicio/client" {
       PageDocumentData,
       PageDocumentDataSlicesSlice,
       AllDocumentTypes,
-      TestySlice,
-      TestySliceDefaultPrimary,
-      TestySliceVariation,
-      TestySliceDefault,
+      TeamSectionSlice,
+      TeamSectionSliceDefaultPrimary,
+      TeamSectionSliceDefaultItem,
+      TeamSectionSliceVariation,
+      TeamSectionSliceDefault,
     };
   }
 }
