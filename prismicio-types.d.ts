@@ -72,7 +72,7 @@ export type HeaderDocument<Lang extends string = string> =
     Lang
   >;
 
-type HomepageDocumentDataSlicesSlice = TeamSectionSlice;
+type HomepageDocumentDataSlicesSlice = FaqSliceSlice | TeamSectionSlice;
 
 /**
  * Content for HomePage documents
