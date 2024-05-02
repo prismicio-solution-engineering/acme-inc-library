@@ -3,4 +3,5 @@
 import dynamic from "next/dynamic";
 
 export const components = {  team_section: dynamic(() => import("./TeamSection")),
+  Faq_slice: dynamic(() => import("./FaqSlice")),
 };
