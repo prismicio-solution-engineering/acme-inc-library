@@ -8,11 +8,11 @@ import { notFound } from "next/navigation";
 
 export async function generateMetadata(): Promise<Metadata> {
   const client = createClient();
-  const page = await client.getSingle("homepage").catch(notFound());
+  const page = await client.getSingle("homepage").catch(()=>{return null});
 
   return {
-    title: page.data.meta_title,
-    description: page.data.meta_description,
+    title: page && page.data.meta_title,
+    description: page && page.data.meta_description,
   };
 }
 
