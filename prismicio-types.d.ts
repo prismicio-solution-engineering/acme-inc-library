@@ -72,7 +72,7 @@ export type HeaderDocument<Lang extends string = string> =
     Lang
   >;
 
-type HomepageDocumentDataSlicesSlice = TeamSectionSlice;
+type HomepageDocumentDataSlicesSlice = FaqSliceSlice | TeamSectionSlice;
 
 /**
  * Content for HomePage documents
@@ -201,6 +201,76 @@ export type PageDocument<Lang extends string = string> =
 export type AllDocumentTypes = HeaderDocument | HomepageDocument | PageDocument;
 
 /**
+ * Primary content in *FaqSlice → Primary*
+ */
+export interface FaqSliceSliceDefaultPrimary {
+  /**
+   * Section Title field in *FaqSlice → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Enter the title for the Faq section
+   * - **API ID Path**: Faq_slice.primary.section_title
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  section_title: prismic.KeyTextField;
+}
+
+/**
+ * Primary content in *FaqSlice → Items*
+ */
+export interface FaqSliceSliceDefaultItem {
+  /**
+   * Question field in *FaqSlice → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Enter the question
+   * - **API ID Path**: Faq_slice.items[].question
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  question: prismic.KeyTextField;
+
+  /**
+   * Answer field in *FaqSlice → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Enter the answer
+   * - **API ID Path**: Faq_slice.items[].answer
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  answer: prismic.KeyTextField;
+}
+
+/**
+ * Default Variation variation for FaqSlice Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default variation of the Faq Slice
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type FaqSliceSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<FaqSliceSliceDefaultPrimary>,
+  Simplify<FaqSliceSliceDefaultItem>
+>;
+
+/**
+ * Slice variation for *FaqSlice*
+ */
+type FaqSliceSliceVariation = FaqSliceSliceDefault;
+
+/**
+ * FaqSlice Shared Slice
+ *
+ * - **API ID**: `Faq_slice`
+ * - **Description**: A Faq section
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type FaqSliceSlice = prismic.SharedSlice<
+  "Faq_slice",
+  FaqSliceSliceVariation
+>;
+
+/**
  * Primary content in *TeamSection → Primary*
  */
 export interface TeamSectionSliceDefaultPrimary {
@@ -300,6 +370,11 @@ declare module "@prismicio/client" {
       PageDocumentData,
       PageDocumentDataSlicesSlice,
       AllDocumentTypes,
+      FaqSliceSlice,
+      FaqSliceSliceDefaultPrimary,
+      FaqSliceSliceDefaultItem,
+      FaqSliceSliceVariation,
+      FaqSliceSliceDefault,
       TeamSectionSlice,
       TeamSectionSliceDefaultPrimary,
       TeamSectionSliceDefaultItem,
