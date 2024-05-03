@@ -11,7 +11,7 @@ import path from "path";
 
 // This function diff local and remote models, and then pushes updates from local to remote, it does not handle screenshots
 
-async function main(repo:string) {
+async function main(repo: string) {
 
   // Get User Session Token
   const token = await getAuthToken()
@@ -19,7 +19,7 @@ async function main(repo:string) {
   // Init Custom Types api Client
   const client = createClient({
     repositoryName: repo, //process.env.REPO || "",
-    token: "",//process.env.CT_API_TOKEN || "",
+    token: "", //process.env.CT_API_TOKEN not needed
     fetchOptions: {
       headers: {
         "User-Agent": "sm-api",
@@ -57,18 +57,6 @@ async function main(repo:string) {
 /**
    * Returns the Prismic content models stored in the Git repository.
    *
-   * **Note**: This method only supports the following adapters:
-   *
-   * - `@slicemachine/adapter-next`
-   * - `@slicemachine/adapter-nuxt`
-   * - `@slicemachine/adapter-sveltekit`
-   *
-   * @remarks
-   * This method clones the Git repository to a temporary location.
-   * @remarks
-   * This method currently does not use the project's Slice Machine adapter; we
-   * are unable to install adapters in the Lambda function at this time.
-   * Instead, it re-implements some of the logic used in our current adapters.
    */
 
 async function extractModels(): Promise<{ slices: SharedSlice[]; customTypes: CustomType[] }> {
@@ -105,9 +93,8 @@ async function extractModels(): Promise<{ slices: SharedSlice[]; customTypes: Cu
         throw new UnsupportedAdapterError(adapterName);
       }
     }
-  } finally {
-    //keeping my repo :)
-    //await fs.rm(process.cwd(), { recursive: true, force: true });
+  } catch {
+    throw new Error("An error occured reading local models")
   }
 }
 
@@ -170,7 +157,7 @@ const getAuthToken = async () => {
 }
 
 
-const repos = ["acme-inc-website-1","acme-inc-website-2"]
-for(const repo of repos){
+const repos = ["acme-inc-website-1", "acme-inc-website-2"]
+for (const repo of repos) {
   main(repo)
 }
