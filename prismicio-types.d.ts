@@ -72,7 +72,7 @@ export type HeaderDocument<Lang extends string = string> =
     Lang
   >;
 
-type HomepageDocumentDataSlicesSlice = FaqSliceSlice;
+type HomepageDocumentDataSlicesSlice = FaqSliceSlice | TeamSectionSlice;
 
 /**
  * Content for HomePage documents
@@ -270,6 +270,86 @@ export type FaqSliceSlice = prismic.SharedSlice<
   FaqSliceSliceVariation
 >;
 
+/**
+ * Primary content in *TeamSection → Primary*
+ */
+export interface TeamSectionSliceDefaultPrimary {
+  /**
+   * Section Title field in *TeamSection → Primary*
+   *
+   * - **Field Type**: Title
+   * - **Placeholder**: Our Team
+   * - **API ID Path**: team_section.primary.section_title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  section_title: prismic.TitleField;
+}
+
+/**
+ * Primary content in *TeamSection → Items*
+ */
+export interface TeamSectionSliceDefaultItem {
+  /**
+   * Name field in *TeamSection → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Name of the team member
+   * - **API ID Path**: team_section.items[].name
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  name: prismic.KeyTextField;
+
+  /**
+   * Position field in *TeamSection → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Position of the team member
+   * - **API ID Path**: team_section.items[].position
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  position: prismic.KeyTextField;
+
+  /**
+   * Profile Picture field in *TeamSection → Items*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: team_section.items[].profile_picture
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  profile_picture: prismic.ImageField<never>;
+}
+
+/**
+ * Default Variation variation for TeamSection Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default variation displaying team members with their names, positions, and profile pictures.
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TeamSectionSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<TeamSectionSliceDefaultPrimary>,
+  Simplify<TeamSectionSliceDefaultItem>
+>;
+
+/**
+ * Slice variation for *TeamSection*
+ */
+type TeamSectionSliceVariation = TeamSectionSliceDefault;
+
+/**
+ * TeamSection Shared Slice
+ *
+ * - **API ID**: `team_section`
+ * - **Description**: The Team Section is made of a card for each team member, each card contains a name, a position, and a profile picture.
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TeamSectionSlice = prismic.SharedSlice<
+  "team_section",
+  TeamSectionSliceVariation
+>;
+
 declare module "@prismicio/client" {
   interface CreateClient {
     (
@@ -295,6 +375,11 @@ declare module "@prismicio/client" {
       FaqSliceSliceDefaultItem,
       FaqSliceSliceVariation,
       FaqSliceSliceDefault,
+      TeamSectionSlice,
+      TeamSectionSliceDefaultPrimary,
+      TeamSectionSliceDefaultItem,
+      TeamSectionSliceVariation,
+      TeamSectionSliceDefault,
     };
   }
 }

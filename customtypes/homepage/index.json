@@ -13,6 +13,9 @@
           "choices": {
             "Faq_slice": {
               "type": "SharedSlice"
+            },
+            "team_section": {
+              "type": "SharedSlice"
             }
           }
         }
