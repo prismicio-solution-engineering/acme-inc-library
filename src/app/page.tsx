@@ -19,8 +19,8 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function Page({ }) {
   const client = createClient();
 
-  const page = await client.getSingle("homepage").catch(notFound());
-  const header = await client.getSingle("header").catch(notFound());
+  const page = await client.getSingle("homepage").catch(()=>notFound());
+  const header = await client.getSingle("header").catch(()=>notFound());
 
   return(
   <>
