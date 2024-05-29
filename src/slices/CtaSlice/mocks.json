@@ -1,0 +1,27 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"title": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Our newest slice",
+							"spans": []
+						},
+						"direction": "ltr"
+					}
+				]
+			},
+			"label": {
+				"__TYPE__": "FieldContent",
+				"type": "Text",
+				"value": "click here"
+			}
+		},
+		"items": []
+	}
+]

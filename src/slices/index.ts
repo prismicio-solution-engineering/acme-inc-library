@@ -2,6 +2,8 @@
 
 import dynamic from "next/dynamic";
 
-export const components = {  team_section: dynamic(() => import("./TeamSection")),
+export const components = {
   Faq_slice: dynamic(() => import("./FaqSlice")),
+  cta_slice: dynamic(() => import("./CtaSlice")),
+  team_section: dynamic(() => import("./TeamSection")),
 };

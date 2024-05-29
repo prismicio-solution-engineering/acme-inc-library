@@ -72,7 +72,10 @@ export type HeaderDocument<Lang extends string = string> =
     Lang
   >;
 
-type HomepageDocumentDataSlicesSlice = FaqSliceSlice | TeamSectionSlice;
+type HomepageDocumentDataSlicesSlice =
+  | CtaSliceSlice
+  | FaqSliceSlice
+  | TeamSectionSlice;
 
 /**
  * Content for HomePage documents
@@ -271,6 +274,61 @@ export type FaqSliceSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *CtaSlice → Primary*
+ */
+export interface CtaSliceSliceDefaultPrimary {
+  /**
+   * Title field in *CtaSlice → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: cta_slice.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * Label field in *CtaSlice → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: cta_slice.primary.label
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  label: prismic.KeyTextField;
+}
+
+/**
+ * Default variation for CtaSlice Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type CtaSliceSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<CtaSliceSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *CtaSlice*
+ */
+type CtaSliceSliceVariation = CtaSliceSliceDefault;
+
+/**
+ * CtaSlice Shared Slice
+ *
+ * - **API ID**: `cta_slice`
+ * - **Description**: CtaSlice
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type CtaSliceSlice = prismic.SharedSlice<
+  "cta_slice",
+  CtaSliceSliceVariation
+>;
+
+/**
  * Primary content in *TeamSection → Primary*
  */
 export interface TeamSectionSliceDefaultPrimary {
@@ -375,6 +433,10 @@ declare module "@prismicio/client" {
       FaqSliceSliceDefaultItem,
       FaqSliceSliceVariation,
       FaqSliceSliceDefault,
+      CtaSliceSlice,
+      CtaSliceSliceDefaultPrimary,
+      CtaSliceSliceVariation,
+      CtaSliceSliceDefault,
       TeamSectionSlice,
       TeamSectionSliceDefaultPrimary,
       TeamSectionSliceDefaultItem,
