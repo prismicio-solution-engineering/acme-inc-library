@@ -73,6 +73,7 @@ export type HeaderDocument<Lang extends string = string> =
   >;
 
 type HomepageDocumentDataSlicesSlice =
+  | RenaudSliceSlice
   | CtaSliceSlice
   | FaqSliceSlice
   | TeamSectionSlice;
@@ -329,6 +330,61 @@ export type CtaSliceSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *RenaudSlice → Primary*
+ */
+export interface RenaudSliceSliceDefaultPrimary {
+  /**
+   * Titre field in *RenaudSlice → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: renaud_slice.primary.titre
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  titre: prismic.RichTextField;
+
+  /**
+   * Description field in *RenaudSlice → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: renaud_slice.primary.description
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description: prismic.RichTextField;
+}
+
+/**
+ * Default variation for RenaudSlice Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type RenaudSliceSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<RenaudSliceSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *RenaudSlice*
+ */
+type RenaudSliceSliceVariation = RenaudSliceSliceDefault;
+
+/**
+ * RenaudSlice Shared Slice
+ *
+ * - **API ID**: `renaud_slice`
+ * - **Description**: RenaudSlice
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type RenaudSliceSlice = prismic.SharedSlice<
+  "renaud_slice",
+  RenaudSliceSliceVariation
+>;
+
+/**
  * Primary content in *TeamSection → Primary*
  */
 export interface TeamSectionSliceDefaultPrimary {
@@ -437,6 +493,10 @@ declare module "@prismicio/client" {
       CtaSliceSliceDefaultPrimary,
       CtaSliceSliceVariation,
       CtaSliceSliceDefault,
+      RenaudSliceSlice,
+      RenaudSliceSliceDefaultPrimary,
+      RenaudSliceSliceVariation,
+      RenaudSliceSliceDefault,
       TeamSectionSlice,
       TeamSectionSliceDefaultPrimary,
       TeamSectionSliceDefaultItem,
