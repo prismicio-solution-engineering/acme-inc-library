@@ -11,9 +11,6 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
-            "case_study_section": {
-              "type": "SharedSlice"
-            },
             "renaud_slice": {
               "type": "SharedSlice"
             },

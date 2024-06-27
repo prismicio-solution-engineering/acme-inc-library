@@ -7,5 +7,4 @@ export const components = {
   cta_slice: dynamic(() => import("./CtaSlice")),
   renaud_slice: dynamic(() => import("./RenaudSlice")),
   team_section: dynamic(() => import("./TeamSection")),
-  case_study_section: dynamic(() => import("./CaseStudySection")),
 };

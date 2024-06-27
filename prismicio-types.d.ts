@@ -73,7 +73,6 @@ export type HeaderDocument<Lang extends string = string> =
   >;
 
 type HomepageDocumentDataSlicesSlice =
-  | CaseStudySectionSlice
   | RenaudSliceSlice
   | CtaSliceSlice
   | FaqSliceSlice
@@ -273,116 +272,6 @@ type FaqSliceSliceVariation = FaqSliceSliceDefault;
 export type FaqSliceSlice = prismic.SharedSlice<
   "Faq_slice",
   FaqSliceSliceVariation
->;
-
-/**
- * Primary content in *CaseStudySection → Primary*
- */
-export interface CaseStudySectionSliceDefaultPrimary {
-  /**
-   * Section Title field in *CaseStudySection → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: Enter the title for the case study section
-   * - **API ID Path**: case_study_section.primary.section_title
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  section_title: prismic.KeyTextField;
-
-  /**
-   * Case Study Image field in *CaseStudySection → Primary*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: case_study_section.primary.image
-   * - **Documentation**: https://prismic.io/docs/field#image
-   */
-  image: prismic.ImageField<never>;
-
-  /**
-   * Case Study Title field in *CaseStudySection → Primary*
-   *
-   * - **Field Type**: Title
-   * - **Placeholder**: Enter the case study's main title
-   * - **API ID Path**: case_study_section.primary.case_study_title
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  case_study_title: prismic.TitleField;
-
-  /**
-   * Case Study Description field in *CaseStudySection → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: Enter the description for the case study
-   * - **API ID Path**: case_study_section.primary.case_study_description
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  case_study_description: prismic.RichTextField;
-
-  /**
-   * Learn More Button Label field in *CaseStudySection → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: Text for the learn more button
-   * - **API ID Path**: case_study_section.primary.learn_more_label
-   * - **Documentation**: https://prismic.io/docs/field#key-text
-   */
-  learn_more_label: prismic.KeyTextField;
-
-  /**
-   * Learn More Button Link field in *CaseStudySection → Primary*
-   *
-   * - **Field Type**: Link
-   * - **Placeholder**: *None*
-   * - **API ID Path**: case_study_section.primary.learn_more_link
-   * - **Documentation**: https://prismic.io/docs/field#link-content-relationship
-   */
-  learn_more_link: prismic.LinkField;
-}
-
-/**
- * Primary content in *CaseStudySection → Items*
- */
-export interface CaseStudySectionSliceDefaultItem {
-  /**
-   * Business Size Option for Selector field in *CaseStudySection → Items*
-   *
-   * - **Field Type**: Select
-   * - **Placeholder**: *None*
-   * - **API ID Path**: case_study_section.items[].business_size_option
-   * - **Documentation**: https://prismic.io/docs/field#select
-   */
-  business_size_option: prismic.SelectField<"small" | "medium" | "large">;
-}
-
-/**
- * Default Variation variation for CaseStudySection Slice
- *
- * - **API ID**: `default`
- * - **Description**: Default variation with an image, title, description and a learn more button.
- * - **Documentation**: https://prismic.io/docs/slice
- */
-export type CaseStudySectionSliceDefault = prismic.SharedSliceVariation<
-  "default",
-  Simplify<CaseStudySectionSliceDefaultPrimary>,
-  Simplify<CaseStudySectionSliceDefaultItem>
->;
-
-/**
- * Slice variation for *CaseStudySection*
- */
-type CaseStudySectionSliceVariation = CaseStudySectionSliceDefault;
-
-/**
- * CaseStudySection Shared Slice
- *
- * - **API ID**: `case_study_section`
- * - **Description**: CaseStudy slice talks about how a specific customer used the product.
- * - **Documentation**: https://prismic.io/docs/slice
- */
-export type CaseStudySectionSlice = prismic.SharedSlice<
-  "case_study_section",
-  CaseStudySectionSliceVariation
 >;
 
 /**
@@ -600,11 +489,6 @@ declare module "@prismicio/client" {
       FaqSliceSliceDefaultItem,
       FaqSliceSliceVariation,
       FaqSliceSliceDefault,
-      CaseStudySectionSlice,
-      CaseStudySectionSliceDefaultPrimary,
-      CaseStudySectionSliceDefaultItem,
-      CaseStudySectionSliceVariation,
-      CaseStudySectionSliceDefault,
       CtaSliceSlice,
       CtaSliceSliceDefaultPrimary,
       CtaSliceSliceVariation,
