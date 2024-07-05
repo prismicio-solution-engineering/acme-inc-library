@@ -73,6 +73,7 @@ export type HeaderDocument<Lang extends string = string> =
   >;
 
 type HomepageDocumentDataSlicesSlice =
+  | MillsSliceSlice
   | CtaSliceSlice
   | FaqSliceSlice
   | TeamSectionSlice;
