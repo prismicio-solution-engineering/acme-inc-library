@@ -329,6 +329,51 @@ export type CtaSliceSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *MillsSlice → Primary*
+ */
+export interface MillsSliceSliceDefaultPrimary {
+  /**
+   * Title field in *MillsSlice → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: mills_slice.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.RichTextField;
+}
+
+/**
+ * Default variation for MillsSlice Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type MillsSliceSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<MillsSliceSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *MillsSlice*
+ */
+type MillsSliceSliceVariation = MillsSliceSliceDefault;
+
+/**
+ * MillsSlice Shared Slice
+ *
+ * - **API ID**: `mills_slice`
+ * - **Description**: MillsSlice
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type MillsSliceSlice = prismic.SharedSlice<
+  "mills_slice",
+  MillsSliceSliceVariation
+>;
+
+/**
  * Primary content in *TeamSection → Primary*
  */
 export interface TeamSectionSliceDefaultPrimary {
@@ -437,6 +482,10 @@ declare module "@prismicio/client" {
       CtaSliceSliceDefaultPrimary,
       CtaSliceSliceVariation,
       CtaSliceSliceDefault,
+      MillsSliceSlice,
+      MillsSliceSliceDefaultPrimary,
+      MillsSliceSliceVariation,
+      MillsSliceSliceDefault,
       TeamSectionSlice,
       TeamSectionSliceDefaultPrimary,
       TeamSectionSliceDefaultItem,
