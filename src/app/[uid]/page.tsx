@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+// Mills is great
 
 type PageParams = { uid: string };
 
