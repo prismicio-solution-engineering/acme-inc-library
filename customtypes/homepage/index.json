@@ -11,6 +11,9 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "dianka_slice": {
+              "type": "SharedSlice"
+            },
             "cta_slice": {
               "type": "SharedSlice"
             },

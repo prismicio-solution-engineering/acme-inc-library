@@ -73,6 +73,7 @@ export type HeaderDocument<Lang extends string = string> =
   >;
 
 type HomepageDocumentDataSlicesSlice =
+  | DiankaSliceSlice
   | CtaSliceSlice
   | FaqSliceSlice
   | TeamSectionSlice;
@@ -204,15 +205,15 @@ export type PageDocument<Lang extends string = string> =
 export type AllDocumentTypes = HeaderDocument | HomepageDocument | PageDocument;
 
 /**
- * Primary content in *FaqSlice → Primary*
+ * Primary content in *FaqSlice → Default Variation → Primary*
  */
 export interface FaqSliceSliceDefaultPrimary {
   /**
-   * Section Title field in *FaqSlice → Primary*
+   * Section Title field in *FaqSlice → Default Variation → Primary*
    *
    * - **Field Type**: Text
    * - **Placeholder**: Enter the title for the Faq section
-   * - **API ID Path**: Faq_slice.primary.section_title
+   * - **API ID Path**: Faq_slice.default.primary.section_title
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   section_title: prismic.KeyTextField;
@@ -274,25 +275,25 @@ export type FaqSliceSlice = prismic.SharedSlice<
 >;
 
 /**
- * Primary content in *CtaSlice → Primary*
+ * Primary content in *CtaSlice → Default → Primary*
  */
 export interface CtaSliceSliceDefaultPrimary {
   /**
-   * Title field in *CtaSlice → Primary*
+   * Title field in *CtaSlice → Default → Primary*
    *
    * - **Field Type**: Rich Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: cta_slice.primary.title
+   * - **API ID Path**: cta_slice.default.primary.title
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   title: prismic.RichTextField;
 
   /**
-   * Label field in *CtaSlice → Primary*
+   * Label field in *CtaSlice → Default → Primary*
    *
    * - **Field Type**: Text
    * - **Placeholder**: *None*
-   * - **API ID Path**: cta_slice.primary.label
+   * - **API ID Path**: cta_slice.default.primary.label
    * - **Documentation**: https://prismic.io/docs/field#key-text
    */
   label: prismic.KeyTextField;
@@ -329,15 +330,60 @@ export type CtaSliceSlice = prismic.SharedSlice<
 >;
 
 /**
- * Primary content in *TeamSection → Primary*
+ * Primary content in *DiankaSlice → Default → Primary*
+ */
+export interface DiankaSliceSliceDefaultPrimary {
+  /**
+   * Name field in *DiankaSlice → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: dianka_slice.default.primary.name
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  name: prismic.RichTextField;
+}
+
+/**
+ * Default variation for DiankaSlice Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type DiankaSliceSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<DiankaSliceSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *DiankaSlice*
+ */
+type DiankaSliceSliceVariation = DiankaSliceSliceDefault;
+
+/**
+ * DiankaSlice Shared Slice
+ *
+ * - **API ID**: `dianka_slice`
+ * - **Description**: DiankaSlice
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type DiankaSliceSlice = prismic.SharedSlice<
+  "dianka_slice",
+  DiankaSliceSliceVariation
+>;
+
+/**
+ * Primary content in *TeamSection → Default Variation → Primary*
  */
 export interface TeamSectionSliceDefaultPrimary {
   /**
-   * Section Title field in *TeamSection → Primary*
+   * Section Title field in *TeamSection → Default Variation → Primary*
    *
    * - **Field Type**: Title
    * - **Placeholder**: Our Team
-   * - **API ID Path**: team_section.primary.section_title
+   * - **API ID Path**: team_section.default.primary.section_title
    * - **Documentation**: https://prismic.io/docs/field#rich-text-title
    */
   section_title: prismic.TitleField;
@@ -437,6 +483,10 @@ declare module "@prismicio/client" {
       CtaSliceSliceDefaultPrimary,
       CtaSliceSliceVariation,
       CtaSliceSliceDefault,
+      DiankaSliceSlice,
+      DiankaSliceSliceDefaultPrimary,
+      DiankaSliceSliceVariation,
+      DiankaSliceSliceDefault,
       TeamSectionSlice,
       TeamSectionSliceDefaultPrimary,
       TeamSectionSliceDefaultItem,
