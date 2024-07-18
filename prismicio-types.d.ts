@@ -73,7 +73,6 @@ export type HeaderDocument<Lang extends string = string> =
   >;
 
 type HomepageDocumentDataSlicesSlice =
-  | DiankaSliceSlice
   | CtaSliceSlice
   | FaqSliceSlice
   | TeamSectionSlice;
@@ -330,51 +329,6 @@ export type CtaSliceSlice = prismic.SharedSlice<
 >;
 
 /**
- * Primary content in *DiankaSlice → Default → Primary*
- */
-export interface DiankaSliceSliceDefaultPrimary {
-  /**
-   * Name field in *DiankaSlice → Default → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: dianka_slice.default.primary.name
-   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
-   */
-  name: prismic.RichTextField;
-}
-
-/**
- * Default variation for DiankaSlice Slice
- *
- * - **API ID**: `default`
- * - **Description**: Default
- * - **Documentation**: https://prismic.io/docs/slice
- */
-export type DiankaSliceSliceDefault = prismic.SharedSliceVariation<
-  "default",
-  Simplify<DiankaSliceSliceDefaultPrimary>,
-  never
->;
-
-/**
- * Slice variation for *DiankaSlice*
- */
-type DiankaSliceSliceVariation = DiankaSliceSliceDefault;
-
-/**
- * DiankaSlice Shared Slice
- *
- * - **API ID**: `dianka_slice`
- * - **Description**: DiankaSlice
- * - **Documentation**: https://prismic.io/docs/slice
- */
-export type DiankaSliceSlice = prismic.SharedSlice<
-  "dianka_slice",
-  DiankaSliceSliceVariation
->;
-
-/**
  * Primary content in *TeamSection → Default Variation → Primary*
  */
 export interface TeamSectionSliceDefaultPrimary {
@@ -483,10 +437,6 @@ declare module "@prismicio/client" {
       CtaSliceSliceDefaultPrimary,
       CtaSliceSliceVariation,
       CtaSliceSliceDefault,
-      DiankaSliceSlice,
-      DiankaSliceSliceDefaultPrimary,
-      DiankaSliceSliceVariation,
-      DiankaSliceSliceDefault,
       TeamSectionSlice,
       TeamSectionSliceDefaultPrimary,
       TeamSectionSliceDefaultItem,
