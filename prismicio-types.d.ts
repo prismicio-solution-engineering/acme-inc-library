@@ -73,6 +73,7 @@ export type HeaderDocument<Lang extends string = string> =
   >;
 
 type HomepageDocumentDataSlicesSlice =
+  | BoldTextSliceSlice
   | CtaSliceSlice
   | FaqSliceSlice
   | TeamSectionSlice;
@@ -274,6 +275,61 @@ export type FaqSliceSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *BoldTextSlice → Default → Primary*
+ */
+export interface BoldTextSliceSliceDefaultPrimary {
+  /**
+   * Title field in *BoldTextSlice → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: bold_text_slice.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * Description field in *BoldTextSlice → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: bold_text_slice.default.primary.description
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  description: prismic.RichTextField;
+}
+
+/**
+ * Default variation for BoldTextSlice Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type BoldTextSliceSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<BoldTextSliceSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *BoldTextSlice*
+ */
+type BoldTextSliceSliceVariation = BoldTextSliceSliceDefault;
+
+/**
+ * BoldTextSlice Shared Slice
+ *
+ * - **API ID**: `bold_text_slice`
+ * - **Description**: BoldTextSlice
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type BoldTextSliceSlice = prismic.SharedSlice<
+  "bold_text_slice",
+  BoldTextSliceSliceVariation
+>;
+
+/**
  * Primary content in *CtaSlice → Default → Primary*
  */
 export interface CtaSliceSliceDefaultPrimary {
@@ -433,6 +489,10 @@ declare module "@prismicio/client" {
       FaqSliceSliceDefaultItem,
       FaqSliceSliceVariation,
       FaqSliceSliceDefault,
+      BoldTextSliceSlice,
+      BoldTextSliceSliceDefaultPrimary,
+      BoldTextSliceSliceVariation,
+      BoldTextSliceSliceDefault,
       CtaSliceSlice,
       CtaSliceSliceDefaultPrimary,
       CtaSliceSliceVariation,

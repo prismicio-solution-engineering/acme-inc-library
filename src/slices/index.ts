@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 
 export const components = {
   Faq_slice: dynamic(() => import("./FaqSlice")),
+  bold_text_slice: dynamic(() => import("./BoldTextSlice")),
   cta_slice: dynamic(() => import("./CtaSlice")),
   team_section: dynamic(() => import("./TeamSection")),
 };
